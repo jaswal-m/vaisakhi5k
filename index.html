@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Prevent caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Vaisakhi 5K - Annual Race Event</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/faq.css">
+    <link rel="stylesheet" href="/css/countdown.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <!-- Lines Background -->
+    <div id="lines-container" class="lines-background"></div>
+
+    <!-- Page Loader -->
+    <div class="page-loader active">
+        <div class="loader-content">
+            <svg class="loader-icon" viewBox="0 0 50 50">
+                <circle class="loader-circle" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+            <span class="loader-text">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <div class="logo">Vaisakhi 5K</div>
+            <div class="nav-links">
+                <a href="/" class="nav-link" aria-current="page">Home</a>
+                <a href="/registration" class="nav-link">Register</a>
+                <a href="/course" class="nav-link">Course Info</a>
+                <a href="/faq" class="nav-link">FAQ</a>
+                <a href="/login" class="nav-link" id="loginBtn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="app">
+        <!-- Content will be dynamically loaded here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="h4">Contact Us</h4>
+                    <a href="mailto:teams@vaisakhi5kny.com" class="footer-text">teams@vaisakhi5kny.com</a>
+                    <p class="footer-text">Central Park<br>New York, NY</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="h4">Quick Links</h4>
+                    <a href="/registration" class="footer-text">Register</a>
+                    <a href="/course" class="footer-text">Course Info</a>
+                    <a href="/faq" class="footer-text">FAQ</a>
+                    <a href="/login" class="footer-text">Login</a>
+                </div>
+                <div class="footer-section">
+                    <h4 class="h4">Race Day</h4>
+                    <p class="footer-text">May 14, 2025<br>7:00 AM - 11:00 AM</p>
+                    <p class="footer-text">Central Park<br>New York</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="small-text">&copy; 2025 Vaisakhi 5K. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/lines.js@1.0.1/dist/lines.min.js"></script>
+    <!-- Scripts -->
+    <script src="/js/router.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/countdown.js"></script>
+    <script src="/js/registration.js"></script>
+    <script src="/js/course.js"></script>
+    <script src="/js/faq.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

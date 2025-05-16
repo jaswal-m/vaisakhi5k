@@ -1,0 +1,37 @@
+# PHP settings
+php_flag display_errors on
+php_value error_reporting E_ALL
+
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /
+
+# Prevent directory listing
+Options -Indexes
+
+# Prevent caching of HTML files
+<FilesMatch "\.(?i:html)$">
+    FileETag None
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </IfModule>
+</FilesMatch>
+
+# Handle .html extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Route all other requests through index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [QSA,L]
+
+# Cache control for static assets
+# Temporarily commented out until mod_headers is enabled
+#<FilesMatch "\.(css|js|jpg|jpeg|png|gif|ico|svg)$">
+#    Header set Cache-Control "max-age=31536000, public"
+#</FilesMatch>
