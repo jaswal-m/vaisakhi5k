@@ -211,11 +211,7 @@ body {
     animation: dash 2s ease-in-out infinite;
 }
 
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
+
 
 @keyframes dash {
     0% {
@@ -229,16 +225,7 @@ body {
     }
 }
 
-/* Lines Background */
-.lines-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-}
+
 
 /* Page Transitions */
 #app {
