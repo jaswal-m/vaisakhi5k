@@ -104,29 +104,33 @@ body {
 
 /* Buttons */
 .btn {
-    background-color: #4F46E5;
-    color: white;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
 .btn-primary {
-    background-color: #4F46E5;
-    color: white;
-    border: none;
+    background-color: white;
+    color: #4F46E5;
+    border: 2px solid #4F46E5;
 }
 
 .btn-primary:hover {
-    background-color: #4338CA;
+    background-color: #4F46E5;
     color: white;
     transform: translateY(-1px);
 }
 
-.btn-outline {
+.btn-secondary {
     background-color: transparent;
     color: #4F46E5;
     border: 2px solid #4F46E5;
 }
 
-.btn-outline:hover {
+.btn-secondary:hover {
     background-color: rgba(79, 70, 229, 0.05);
     color: #4338CA;
     border-color: #4338CA;
