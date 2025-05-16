@@ -104,14 +104,8 @@ body {
 
 /* Buttons */
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    cursor: pointer;
+    background-color: #4F46E5;
+    color: white;
 }
 
 .btn-primary {
