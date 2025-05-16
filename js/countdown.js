@@ -1,7 +1,7 @@
 let countdownInterval = null;
 
 function initializeCountdown() {
-    const raceDate = new Date('2025-05-14T07:00:00-04:00');
+    const raceDate = new Date('2026-05-14T07:00:00-04:00');
     const daysEl = document.getElementById('countdown-days');
     const hoursEl = document.getElementById('countdown-hours');
     const minutesEl = document.getElementById('countdown-minutes');

@@ -161,7 +161,7 @@
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #4F46E5;
     margin-bottom: 0.5rem;
     font-family: 'DM Sans', sans-serif;
     line-height: 1;
