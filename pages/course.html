@@ -1,102 +1,116 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Course Info - Vaisakhi 5K</title>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <main>
-        <section class="section course-section">
-            <div class="container">
-                <h1 class="section-title">Course Information</h1>
-                <div class="course-container">
-                    <div class="course-map">
-                        <div id="map" class="map-container"></div>
-                    </div>
-                    <div class="course-details">
-                        <div class="course-info-card">
-                            <h3>Course Overview</h3>
-                            <p>The Vaisakhi 5K course takes you through the scenic paths of Central Park, starting at the 72nd Street Transverse and finishing at Bethesda Fountain.</p>
-                            <ul class="course-features">
-                                <li>
-                                    <span class="feature-icon">📍</span>
-                                    <div class="feature-content">
-                                        <strong>Start Location:</strong>
-                                        <p>72nd Street Transverse, Central Park</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="feature-icon">🏁</span>
-                                    <div class="feature-content">
-                                        <strong>Finish Line:</strong>
-                                        <p>Bethesda Fountain</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="feature-icon">⏱️</span>
-                                    <div class="feature-content">
-                                        <strong>Course Record:</strong>
-                                        <p>15:42 (Male) / 17:23 (Female)</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="feature-icon">📊</span>
-                                    <div class="feature-content">
-                                        <strong>Elevation Gain:</strong>
-                                        <p>124 feet</p>
-                                    </div>
-                                </li>
-                            </ul>
+    <header class="page-header">
+        <div class="container">
+            <h1>Course Map</h1>
+            <p class="subtitle">Explore the scenic 5K route through Central Park</p>
+        </div>
+    </header>
+
+    <section class="course-section">
+        <div class="container">
+            <div class="course-container">
+                <div class="course-map-wrapper">
+                    <div id="map" class="map-container"></div>
+                    <div class="weather-info"></div>
+                </div>
+                
+                <div class="course-info">
+                    <div class="course-info-card">
+                        <h3>Course Overview</h3>
+                        <p>Experience a beautiful 5K through Central Park's iconic landscapes, starting at the 72nd Street Transverse and finishing at the historic Bethesda Fountain.</p>
+                        
+                        <div class="course-stats">
+                            <div class="stat-item">
+                                <span class="material-icons stat-icon">straighten</span>
+                                <div class="stat-content">
+                                    <span class="stat-value">5K</span>
+                                    <span class="stat-label">Distance</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="material-icons stat-icon">terrain</span>
+                                <div class="stat-content">
+                                    <span class="stat-value">124 ft</span>
+                                    <span class="stat-label">Elevation Gain</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="material-icons stat-icon">timer</span>
+                                <div class="stat-content">
+                                    <span class="stat-value">15:42</span>
+                                    <span class="stat-label">Course Record</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="course-info-card">
-                            <h3>Aid Stations</h3>
-                            <div class="aid-stations">
-                                <div class="aid-station">
-                                    <span class="station-marker">1</span>
-                                    <div class="station-details">
-                                        <strong>Mile 1</strong>
-                                        <p>Water, Sports Drinks</p>
-                                    </div>
+
+                        <div class="elevation-chart">
+                            <h4>Elevation Profile</h4>
+                            <canvas id="elevation-profile"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="course-info-card">
+                        <h3>Aid Stations</h3>
+                        <div class="aid-stations">
+                            <div class="aid-station">
+                                <span class="station-marker">1</span>
+                                <div class="station-details">
+                                    <strong>Mile 1</strong>
+                                    <p>Water, Sports Drinks</p>
                                 </div>
-                                <div class="aid-station">
-                                    <span class="station-marker">2</span>
-                                    <div class="station-details">
-                                        <strong>Mile 2</strong>
-                                        <p>Water, Energy Gels</p>
-                                    </div>
+                            </div>
+                            <div class="aid-station">
+                                <span class="station-marker">2</span>
+                                <div class="station-details">
+                                    <strong>Mile 2</strong>
+                                    <p>Water, Energy Gels</p>
                                 </div>
-                                <div class="aid-station">
-                                    <span class="station-marker">F</span>
-                                    <div class="station-details">
-                                        <strong>Finish Line</strong>
-                                        <p>Water, Sports Drinks, Snacks</p>
-                                    </div>
+                            </div>
+                            <div class="aid-station">
+                                <span class="station-marker">F</span>
+                                <div class="station-details">
+                                    <strong>Finish Line</strong>
+                                    <p>Water, Sports Drinks, Snacks</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="course-tips">
-                    <h3>Course Tips</h3>
-                    <div class="tips-grid">
-                        <div class="tip-card">
-                            <span class="tip-icon">🌅</span>
-                            <h4>Early Start</h4>
-                            <p>Race begins at 7:00 AM sharp. Arrive at least 45 minutes early for bib pickup and warm-up.</p>
-                        </div>
-                        <div class="tip-card">
-                            <span class="tip-icon">🎽</span>
-                            <h4>Gear Check</h4>
-                            <p>Free gear check available near the start line. Use the provided clear bag for your belongings.</p>
-                        </div>
-                        <div class="tip-card">
-                            <span class="tip-icon">🚻</span>
-                            <h4>Facilities</h4>
-                            <p>Portable toilets available at start/finish and near each aid station.</p>
-                        </div>
-                        <div class="tip-card">
-                            <span class="tip-icon">📸</span>
-                            <h4>Photo Spots</h4>
-                            <p>Professional photographers positioned at key scenic points. Free digital downloads post-race.</p>
-                        </div>
+            </div>
+
+            <div class="course-tips">
+                <h3>Race Day Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="material-icons tip-icon">wb_twilight</span>
+                        <h4>Early Start</h4>
+                        <p>Race begins at 7:00 AM sharp. Plan to arrive by 6:15 AM for a smooth race morning.</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="material-icons tip-icon">local_parking</span>
+                        <h4>Parking</h4>
+                        <p>Limited parking available at 72nd St garage. Consider public transit or rideshare.</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="material-icons tip-icon">inventory_2</span>
+                        <h4>Gear Check</h4>
+                        <p>Free gear check opens at 6:00 AM. Use clear bags provided at packet pickup.</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="material-icons tip-icon">wc</span>
+                        <h4>Facilities</h4>
+                        <p>Restrooms available at start/finish and near each aid station.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
+        </div>
+    </section>
 </main>

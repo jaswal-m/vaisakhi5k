@@ -1,3 +1,5 @@
+import toast from './toast.js';
+
 class Router {
     constructor() {
         this.registerServiceWorker();
@@ -103,7 +105,8 @@ class Router {
             '/': '/css/home.css',
             '/faq': '/css/faq.css',
             '/registration': '/css/forms.css',
-            '/course': '/css/course.css'
+            '/course': '/css/course.css',
+            '/login': '/css/auth.css'
         };
 
         const stylesheet = stylesheets[path];
@@ -156,12 +159,31 @@ class Router {
             } else if (path === '/registration' && typeof initializeRegistration === 'function') {
                 initializeRegistration();
             } else if (path === '/course' && typeof initializeCourse === 'function') {
+                // Load Mapbox and Chart.js when needed
+                if (!window.mapboxgl) {
+                    await Promise.all([
+                        this.loadScript('https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'),
+                        this.loadScript('https://cdn.jsdelivr.net/npm/chart.js')
+                    ]);
+                }
                 initializeCourse();
+            } else if (path === '/login' && typeof initializeAuth === 'function') {
+                initializeAuth();
             }
         } catch (error) {
             console.error('Error initializing page scripts:', error);
             this.showError('Failed to initialize page functionality');
         }
+    }
+
+    async loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
     }
 
     async handleRoute() {
@@ -244,6 +266,7 @@ class Router {
                     </div>
                 `;
             }
+            this.showError(error.message);
         } finally {
             if (loader) loader.classList.remove('active');
         }
@@ -259,11 +282,11 @@ class Router {
     }
 
     showError(message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.textContent = message;
-        document.querySelector('main')?.prepend(errorDiv);
-        setTimeout(() => errorDiv.remove(), 5000);
+        toast.error({
+            title: 'Error',
+            message: message,
+            duration: 5000
+        });
     }
 }
 

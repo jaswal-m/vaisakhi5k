@@ -1,4 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
+import toast from './toast.js';
+
+// Initialize toast system
+window.toast = toast;
+
+// Global error handling
+window.addEventListener('error', (event) => {
+    toast.error({
+        title: 'Error',
+        message: 'Something went wrong. Please try refreshing the page.',
+        duration: 7000
+    });
+    console.error(event.error);
+});
+
+// Handle network errors
+window.addEventListener('offline', () => {
+    toast.warning({
+        title: 'No Connection',
+        message: 'You are currently offline. Some features may not work.',
+        duration: 0 // Won't auto-dismiss
+    });
+});
+
+window.addEventListener('online', () => {
+    toast.success({
+        title: 'Connected',
+        message: 'Your internet connection has been restored.',
+        duration: 3000
+    });
+});
+
+// Initialize any global features
+document.addEventListener('DOMContentLoaded', async () => {
+    // Listen for dynamic content loading
+    document.addEventListener('contentLoaded', (e) => {
+        toast.info({
+            title: 'Content Updated',
+            message: e.detail?.message || 'Page content has been updated',
+            duration: 2000
+        });
+    });
+
+    // Handle form submissions globally
+    document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!form.hasAttribute('data-no-toast')) {
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        }
+    });
+
+    // Check for new version and clear cache
+    await checkForNewVersion();
+
     // Initialize Lines background
     if (typeof Lines !== 'undefined') {
         new Lines({
@@ -84,3 +143,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animateOnScroll();
 });
+
+async function checkForNewVersion() {
+    try {
+        // Fetch current version from server
+        const response = await fetch('/version.json?t=' + Date.now());
+        const { version } = await response.json();
+        
+        // Get stored version from localStorage
+        const storedVersion = localStorage.getItem('appVersion');
+        
+        if (version !== storedVersion) {
+            // Clear all caches
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                await Promise.all(
+                    cacheNames.map(cacheName => caches.delete(cacheName))
+                );
+            }
+            
+            // Clear localStorage except for user preferences
+            const userPrefs = localStorage.getItem('userPreferences');
+            localStorage.clear();
+            if (userPrefs) localStorage.setItem('userPreferences', userPrefs);
+            
+            // Store new version
+            localStorage.setItem('appVersion', version);
+            
+            // Show toast for app update
+            if (storedVersion) {
+                toast.success({
+                    title: 'App Updated',
+                    message: 'The application has been updated to the latest version.',
+                    duration: 4000
+                });
+                window.location.reload(true);
+            }
+        }
+    } catch (error) {
+        console.warn('Version check failed:', error);
+        toast.error({
+            title: 'Update Check Failed',
+            message: 'Failed to check for updates. Please try again later.',
+            duration: 5000
+        });
+    }
+}
+
+// Export toast for use in other modules
+export { toast as default };

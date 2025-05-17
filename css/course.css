@@ -1,0 +1,219 @@
+.course-section {
+    padding: 2rem 0 4rem;
+}
+
+.course-container {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 400px);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.course-map-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    height: 600px;
+    background: #f5f5f5;
+}
+
+.weather-info {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.875rem;
+    z-index: 1;
+    color: #1a1a1a;
+}
+
+.weather-update {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.temperature {
+    font-weight: 600;
+    color: #0851a6;
+}
+
+.conditions, .humidity {
+    color: #505050;
+}
+
+.course-info-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.course-info-card h3 {
+    color: #1a1a1a;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.course-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0851a6;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #505050;
+}
+
+.elevation-chart {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.elevation-chart h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.aid-stations {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.aid-station {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 6px;
+}
+
+.station-marker {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0F6CBD;
+    color: white;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.station-details strong {
+    display: block;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    color: #1a1a1a;
+}
+
+.station-details p {
+    font-size: 0.875rem;
+    color: #505050;
+    margin: 0;
+}
+
+.course-tips {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.course-tips h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.tip-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.tip-card:hover {
+    transform: translateY(-2px);
+}
+
+.tip-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.tip-card h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+.tip-card p {
+    font-size: 0.875rem;
+    color: #505050;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .course-container {
+        grid-template-columns: 1fr;
+    }
+
+    .map-container {
+        height: 400px;
+    }
+
+    .course-info {
+        order: -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .course-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .tip-card {
+        text-align: center;
+    }
+}

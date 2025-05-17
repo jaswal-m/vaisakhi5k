@@ -1,113 +1,165 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Google Maps
-    if (typeof google !== 'undefined' && document.getElementById('map')) {
-        const centralPark = { lat: 40.7829, lng: -73.9654 };
-        const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: centralPark,
-            styles: [
-                {
-                    featureType: 'poi',
-                    elementType: 'labels',
-                    stylers: [{ visibility: 'off' }]
+document.addEventListener('DOMContentLoaded', initializeCourse);
+
+async function initializeCourse() {
+    // Check if we're on the course page
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) return;
+
+    // Add loading state
+    mapContainer.innerHTML = '<div class="map-loading">Loading map...</div>';
+
+    try {
+        // Ensure mapboxgl is available
+        if (typeof mapboxgl === 'undefined') {
+            throw new Error('Mapbox GL JS is not loaded');
+        }
+
+        // Initialize map
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Remember to replace with your actual token
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-73.9665, 40.7812], // Central Park coordinates
+            zoom: 14
+        });
+
+        // Add map controls
+        map.addControl(new mapboxgl.NavigationControl());
+
+        // Add route data once map is loaded
+        map.on('load', () => {
+            // Add course route data here
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': [
+                            [-73.9683, 40.7752], // 72nd Street Transverse start
+                            [-73.9680, 40.7745],
+                            [-73.9675, 40.7747],
+                            [-73.9665, 40.7760],
+                            [-73.9685, 40.7775],
+                            [-73.9690, 40.7785],
+                            [-73.9669, 40.7812]  // Bethesda Fountain finish
+                        ]
+                    }
                 }
-            ]
-        });
+            });
 
-        // Course path coordinates (example path)
-        const coursePath = [
-            { lat: 40.7744, lng: -73.9694 }, // Start at 72nd St Transverse
-            { lat: 40.7747, lng: -73.9684 },
-            { lat: 40.7750, lng: -73.9674 },
-            { lat: 40.7760, lng: -73.9664 },
-            { lat: 40.7770, lng: -73.9654 },
-            { lat: 40.7780, lng: -73.9644 },
-            { lat: 40.7790, lng: -73.9634 },
-            { lat: 40.7800, lng: -73.9624 },
-            { lat: 40.7810, lng: -73.9614 },
-            { lat: 40.7820, lng: -73.9604 },
-            { lat: 40.7725, lng: -73.9684 }  // Finish at Bethesda Fountain
-        ];
-
-        // Draw course path
-        const courseLine = new google.maps.Polyline({
-            path: coursePath,
-            geodesic: true,
-            strokeColor: '#4F46E5',
-            strokeOpacity: 1.0,
-            strokeWeight: 3
-        });
-        courseLine.setMap(map);
-
-        // Add start marker
-        new google.maps.Marker({
-            position: coursePath[0],
-            map: map,
-            title: 'Start Line',
-            icon: {
-                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#4F46E5">
-                        <path d="M12 0C8.13 0 5 3.13 5 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                `),
-                scaledSize: new google.maps.Size(32, 32),
-                anchor: new google.maps.Point(16, 32)
-            }
-        });
-
-        // Add finish marker
-        new google.maps.Marker({
-            position: coursePath[coursePath.length - 1],
-            map: map,
-            title: 'Finish Line',
-            icon: {
-                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#4CAF50">
-                        <path d="M12 0C8.13 0 5 3.13 5 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                `),
-                scaledSize: new google.maps.Size(32, 32),
-                anchor: new google.maps.Point(16, 32)
-            }
-        });
-
-        // Add aid station markers
-        const aidStations = [
-            { position: coursePath[3], title: 'Aid Station 1' },
-            { position: coursePath[6], title: 'Aid Station 2' }
-        ];
-
-        aidStations.forEach(station => {
-            new google.maps.Marker({
-                position: station.position,
-                map: map,
-                title: station.title,
-                icon: {
-                    url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FF9800">
-                            <path d="M12 0C8.13 0 5 3.13 5 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    `),
-                    scaledSize: new google.maps.Size(24, 24),
-                    anchor: new google.maps.Point(12, 24)
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#0851a6',
+                    'line-width': 4
                 }
             });
         });
-    }
 
-    // Animate course tips on scroll
-    const observer = new IntersectionObserver((entries) => {
+        // Initialize elevation chart
+        const ctx = document.getElementById('elevation-profile');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Start', '0.5mi', '1mi', '1.5mi', '2mi', '2.5mi', 'Finish'],
+                    datasets: [{
+                        label: 'Elevation (feet)',
+                        data: [80, 95, 110, 85, 124, 90, 75],
+                        fill: true,
+                        borderColor: '#0851a6',
+                        backgroundColor: 'rgba(8, 81, 166, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 140
+                        }
+                    }
+                }
+            });
+        }
+
+    } catch (error) {
+        console.error('Map initialization error:', error);
+        mapContainer.innerHTML = `
+            <div class="map-error">
+                <p>Sorry, we couldn't load the course map.</p>
+                <p>Please refresh the page or try again later.</p>
+            </div>`;
+    }
+}
+
+function initializeScrollAnimations() {
+    const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate');
             }
         });
-    }, {
-        threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.tip-card').forEach(card => {
         observer.observe(card);
         card.classList.add('animate-on-scroll');
     });
-});
+}
+
+function addMarker(map, coordinates, color, title, description) {
+    new mapboxgl.Marker({ color })
+        .setLngLat(coordinates)
+        .setPopup(new mapboxgl.Popup().setHTML(`<h3>${sanitize(title)}</h3><p>${sanitize(description)}</p>`))
+        .addTo(map);
+}
+
+// ✅ Escape HTML content to prevent injection
+function sanitize(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function initializeWeatherUpdates() {
+    const weatherInfo = document.querySelector('.weather-info');
+    if (!weatherInfo) return;
+
+    updateWeather(weatherInfo);
+    setInterval(() => updateWeather(weatherInfo), 300000); // 5 mins
+}
+
+function updateWeather(container) {
+    const weather = {
+        temperature: Math.round(Math.random() * (85 - 65) + 65),
+        conditions: ['Sunny', 'Partly Cloudy', 'Clear'][Math.floor(Math.random() * 3)],
+        humidity: Math.round(Math.random() * (80 - 40) + 40)
+    };
+
+    container.innerHTML = `
+        <div class="weather-update">
+            <span class="temperature">${weather.temperature}°F</span>
+            <span class="conditions">${sanitize(weather.conditions)}</span>
+            <span class="humidity">Humidity: ${weather.humidity}%</span>
+        </div>
+    `;
+}
+
+export { initializeCourse };

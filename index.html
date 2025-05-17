@@ -14,6 +14,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     
     <!-- Styles -->
     <link rel="stylesheet" href="/css/typography.css">
@@ -30,9 +33,7 @@
     <!-- Page Loader -->
     <div class="page-loader active">
         <div class="loader-content">
-            <svg class="loader-icon" viewBox="0 0 50 50">
-                <circle class="loader-circle" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-            </svg>
+            <span class="material-icons loader-icon">sync</span>
             <span class="loader-text">Loading...</span>
         </div>
     </div>
@@ -40,7 +41,10 @@
     <!-- Navigation -->
     <nav id="main-nav">
         <div class="nav-container">
-            <div class="logo">Vaisakhi 5K</div>
+            <div class="logo">
+                <span class="material-icons-outlined">directions_run</span>
+                Vaisakhi 5K
+            </div>
             <div class="nav-links">
                 <a href="/" class="nav-link" aria-current="page">Home</a>
                 <a href="/registration" class="nav-link">Register</a>
@@ -86,13 +90,12 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/lines.js@1.0.1/dist/lines.min.js"></script>
-    <!-- Scripts -->
-    <script src="/js/router.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/countdown.js"></script>
-    <script src="/js/registration.js"></script>
-    <script src="/js/course.js"></script>
-    <script src="/js/faq.js"></script>
-    <script src="/js/auth.js"></script>
+    <script src="/js/router.js" type="module"></script>
+    <script src="/js/main.js" type="module"></script>
+    <script src="/js/countdown.js" type="module"></script>
+    <script src="/js/registration.js" type="module"></script>
+    <script src="/js/course.js" type="module"></script>
+    <script src="/js/faq.js" type="module"></script>
+    <script src="/js/auth.js" type="module"></script>
 </body>
 </html>

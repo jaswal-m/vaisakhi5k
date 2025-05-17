@@ -1,98 +1,129 @@
 /* Typography Scale */
 :root {
+    --font-family-base: 'Montserrat', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     --font-size-xs: 12px;
     --font-size-sm: 14px;
-    --font-size-base: 16px;
-    --font-size-lg: 18px;
-    --font-size-xl: 20px;
-    --font-size-2xl: 24px;
-    --font-size-3xl: 30px;
-    --font-size-4xl: 36px;
-    --font-size-5xl: 48px;
-    --font-size-6xl: 60px;
-    
-    --line-height-tight: 1.2;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+
+    --line-height-none: 1;
+    --line-height-tight: 1.25;
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.75;
-    
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    --spacing-2xl: 48px;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #505050;
+    --color-brand: #0851a6;
+    --color-brand-hover: #064081;
 }
 
 /* Font Families */
 body {
-    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-family-base);
     font-size: var(--font-size-base);
     line-height: var(--line-height-normal);
-    color: #374151;
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-weight: 700;
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-tight);
     margin: 0;
 }
 
 .hero-title {
-    font-size: var(--font-size-6xl);
-    font-weight: 800;
-    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.025em;
 }
 
 .hero-subtitle {
     font-size: var(--font-size-xl);
-    color: #6B7280;
-    margin-bottom: var(--spacing-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--font-size-2xl);
 }
 
 .section-title {
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
 .h4 {
     font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--font-size-lg);
 }
 
 .small-text {
     font-size: var(--font-size-sm);
-    color: #6B7280;
+    color: var(--color-text-secondary);
 }
 
 .highlight {
-    color: #4F46E5;
+    color: var(--color-brand);
 }
 
 /* Links */
 a {
-    color: #4F46E5;
+    color: var(--color-brand);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: #4338CA;
+    color: var(--color-brand-hover);
 }
 
 /* Stats */
 .stat-number {
-    font-family: 'Space Grotesk', monospace;
-    font-size: var(--font-size-3xl);
-    font-weight: 700;
-    color: #4F46E5;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-brand);
     display: block;
 }
 
 .stat-label {
     font-size: var(--font-size-sm);
-    color: #6B7280;
+    color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+/* Additional Styles */
+.nav-text {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+}
+
+.body-large {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+}
+
+.body-small {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+}
+
+.text-brand {
+    color: var(--color-brand);
+}
+
+.text-secondary {
+    color: var(--color-text-secondary);
 }
